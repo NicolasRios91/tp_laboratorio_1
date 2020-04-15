@@ -5,13 +5,14 @@
 
 int main()
 {
-    int numeroUno=-2;
-    int numeroDos=10;
+    int numeroUno=4;
+    int numeroDos=1;
     int suma;
     int resta;
     float division;
     int multiplicacion;
-    int factorial;
+    int factorialA;
+    int factorialB;
     int respuesta;
 
 
@@ -36,31 +37,28 @@ do
                 numeroUno = IngresarNumero();
                 break;
             case 2:
-                numeroDos = IngresarNumero ();
+                numeroDos = IngresarNumero();
                 break;
             case 3:
                 suma = funcionSuma(numeroUno,numeroDos);
                 //system("CLS");
                 break;
             case 4:
-                funcionResta(numeroUno,numeroDos);
+                resta = funcionResta(numeroUno,numeroDos);
                 break;
             case 5:
-                division = funcionDivision(numeroUno,numeroDos,"No se puede dividir por 0 ");
+                division = funcionDivision(numeroUno,numeroDos);
                 break;
             case 6:
-                multiplicacion = funcionMultiplicacion(numeroUno,numeroDos);
+                multiplicacion= funcionMultiplicacion(numeroUno,numeroDos);
                 break;
             case 7:
-                //system("CLS");
-                funcionFactorial(numeroUno,"\nNo se puede factorear un numero negativo\n");
+             factorialA= funcionFactorial(numeroUno);
+             factorialB= funcionFactorial(numeroDos);
                 break;
             case 8:
-                CalcularTodo (numeroUno,numeroDos,"\nno se pudo realizar la operacion");
-
-
-
-
+            MostrarTodo(numeroUno,numeroDos,suma,resta,division,multiplicacion,factorialA,factorialB,"\nNo se puede dividir por 0","\nNo se puede factorear un numero negativo");
+                break;
 
         }
     }while (respuesta!=9);

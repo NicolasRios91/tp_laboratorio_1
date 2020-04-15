@@ -1,6 +1,14 @@
 
 
-
+int Validar (int valor2)
+{
+    int valorDeRetorno=1;
+    if (valor2==0)
+    {
+        valorDeRetorno = 0;
+    }
+    return valorDeRetorno;
+}
 int funcionSuma (int valor1,int valor2)
 {
     int resultado;
@@ -24,22 +32,19 @@ int funcionMultiplicacion (int valor1,int valor2)
 }
 
 
-float funcionDivision (int valor1,int valor2,char error[])
+float funcionDivision (int valor1,int valor2)
 {
     float resultado;
-    if (valor2!=0)
+    if(valor2!=0)
     {
         resultado = (float)valor1 /valor2;
         return resultado;
     }
-    else
-    {
-       printf("%s", error);
-    }
+
 }
 
 
-int funcionFactorial (int valor1,char error[])
+int funcionFactorial (int valor1)
 {
     int i;
     int resultado=1;
@@ -49,15 +54,11 @@ int funcionFactorial (int valor1,char error[])
         {
             resultado = resultado*i;
         }
+    }
+
     return resultado;
-    }
-    else
-    {
-        printf("%s",error);
-    }
 
 }
-
 
 int IngresarNumero ()
 {
@@ -67,26 +68,14 @@ int IngresarNumero ()
     return valorA;
 }
 
-void CalcularTodo(int valorA,int valorB,char error[])
+void MostrarTodo(int numeroUno,int numeroDos,int suma, int resta, float division, int multiplicacion, int factorialA,int factorialB,char error1[],char error2)
 {
-    int suma = funcionSuma(valorA,valorB);
-    printf("suma %d",suma);
-    int resta = funcionResta(valorA,valorB);
-    printf("\nresta %d", resta);
-    float division = funcionDivision (valorA,valorB,error);
-    printf("\ndivision %.2f",division);
-    int multiplicacion = funcionMultiplicacion (valorA,valorB);
-    printf("\nmultiplicacion %d",multiplicacion);
-    int factorial = funcionFactorial(valorA,error);
-    if (factorial)
-    {
-        printf("factorial %d",factorial);
-    }
-    else
-    {
-        printf("error");
-    }
+    int i=numeroDos;
+    printf("\n\tsuma %d",suma);
+    printf("\n\tresta %d",resta);
+    printf("\n\tdivision %2.f",division);
+    printf("\n\tMultiplicacion %d",multiplicacion);
+    printf("\n\tFactorial %d es %d", numeroUno,factorialA);
+    printf("\n\tFactorial %d es %d", numeroDos,factorialB);
+
 }
-
-
-
