@@ -1,48 +1,57 @@
 
 
-int ValidarDivision (int valor)
+void ValidarDivision (int valor,float division,char error[])//Recibe el segundo operando, y el valor de retorno de la funcion SacarDivision(si devuelvió),muestra error o el resultado segun correspond
 {
-    int valorDeRetorno=1;
-    if (valor==0)
+    if (valor ==0)
     {
-        valorDeRetorno = 0;//Entra al mensaje de error cuando el segundo valor de la division es 0
+        printf("\n\t%s",error);
     }
-    return valorDeRetorno;
+    else
+    {
+        printf("\n\tEl resultado de la division es: %.2f",division);
+    }
+}
+//
+void ValidarFactorial(int valor,int factorial,char error[])
+{
+
+    if (valor>-1)
+    {
+        printf("\n\tEl Factorial de %d es: %d", valor,factorial);
+
+    }
+    else
+    {
+            printf("\n\t%s",error);
+    }
 }
 
-int ValidarFactorial(int valor)
-{
-    int valorDeRetorno=1;
-    if (valor <0)
-    {
-        valorDeRetorno=0;//igual que el error de la division solo cambia la logica
-    }
-    return valorDeRetorno;
-}
-int funcionSuma (int valor1,int valor2)
+//
+int SacarSuma (int valor1,int valor2)
 {
     int resultado;
     resultado = valor1 + valor2;
     return resultado;
 }
 
-int funcionResta (int valor1,int valor2)
+//
+int SacarResta (int valor1,int valor2)
 {
     int resultado;
     resultado = valor1 - valor2;
     return resultado;
 }
 
-
-int funcionMultiplicacion (int valor1,int valor2)
+//
+int SacarMultiplicacion (int valor1,int valor2)
 {
     int resultado;
     resultado = valor1 * valor2;
     return resultado;
 }
 
-
-float funcionDivision (int valor1,int valor2)
+//
+float SacarDivision (int valor1,int valor2)
 {
 
     float resultado;
@@ -54,8 +63,8 @@ float funcionDivision (int valor1,int valor2)
 
 }
 
-
-int funcionFactorial (int valor)
+//
+int SacarFactorial (int valor)
 {
     int i;
     int resultado=1;
@@ -71,53 +80,77 @@ int funcionFactorial (int valor)
 
 }
 
+//
 int IngresarNumero ()
 {
     int valorA;
-    printf("Ingrese el valor: ");
+    printf("  Ingrese el valor: ");
     scanf ("%d", &valorA);
     return valorA;
 }
 
-void MostrarTodo(int valor1,int valor2,int suma, int resta, float division, int multiplicacion, int factorial1,int factorial2,char error1[],char error2[])
+//
+void MostrarMenu(int valor_1,int valor_2,int contador)
 {
-    int validarFactorial1;
-    int validarFactorial2;
-    int validarDivision;
-    printf("\n\tsuma %d",suma);
-    printf("\n\tresta %d",resta);
-/////////
-    validarDivision = ValidarDivision(valor2);
-    validarFactorial1 = ValidarFactorial(valor1);
-    validarFactorial2 = ValidarFactorial(valor2);
-    if (validarDivision ==0)
-    {
-        printf("\n\t%s",error1);
-    }
-    else
-    {
-        printf("\n\tdivision %.2f",division);
-    }
-    printf("\n\tMultiplicacion %d",multiplicacion);
-//////////
+            switch(contador)
+            {
+                case 1:
+                printf("\t\t**CALCULADORA**\n");
+                printf("\n  1- Ingresar 1er operando (A=X)");
+                printf("\n  2- Ingresar 2do operando (B=Y)");
+                printf("\n  3- Calcular todas la operaciones");
+                printf("\n\ta- Calcular la suma (A+B)");
+                printf("\n\tb- Calcular la resta (A-B)");
+                printf("\n\tc- Calcular la division (A/B)");
+                printf("\n\td- Calcular la multiplicacion (A*B)");
+                printf("\n\te- Calcular el factorial (A!)");
+                printf("\n  4- Informar resultados");
+                printf("\n  5- Salir\n");
+                printf("\n  Elija una opcion (1-5): ");
+                break;
+                case 2:
 
-    if (validarFactorial1==1)
-    {
-        printf("\n\tFactorial %d es %d", valor1,factorial1);
+                printf("\n  1- Ingresar 1er operando (A=%d)",valor_1);
+                printf("\n  2- Ingresar 2do operando (B=Y)");
+                printf("\n  3- Calcular todas la operaciones",valor_1);
+                printf("\n\ta- Calcular la suma (%d+B)",valor_1);
+                printf("\n\tb- Calcular la resta (%d-B)",valor_1);
+                printf("\n\tc- Calcular la division (%d/B)",valor_1);
+                printf("\n\td- Calcular la multiplicacion (%d*B)",valor_1);
+                printf("\n\te- Calcular el factorial (%d!)",valor_1);
+                printf("\n  4- Informar resultados");
+                printf("\n  5- Salir\n");
+                printf("\n  Elija una opcion (1-5): ");
+                break;
 
-    }
-    else
-    {
-            printf("\n\t%s",error2);
-    }
-    if (validarFactorial2==1)
-    {
-        printf("\n\tFactorial %d es %d", valor2,factorial2);
+                default:
 
-    }
-    else
-    {
-            printf("\n\t%s",error2);
-    }
+                printf("\n  1- Ingresar 1er operando (A=%d)",valor_1);
+                printf("\n  2- Ingresar 2do operando (B=%d)",valor_2);
+                printf("\n  3- Calcular todas la operaciones");
+                printf("\n\ta- Calcular la suma (%d+%d)",valor_1,valor_2);
+                printf("\n\tb- Calcular la resta (%d-%d)",valor_1,valor_2);
+                printf("\n\tc- Calcular la division (%d/%d)",valor_1,valor_2);
+                printf("\n\td- Calcular la multiplicacion (%d*%d)",valor_1,valor_2);
+                printf("\n\te- Calcular el factorial (%d!)",valor_1);
+                printf("\n  4- Informar resultados");
+                printf("\n  5- Salir\n");
+                printf("\n  Elija una opcion (1-5): ");
+                break;
+                }
+
+}
+
+//
+void MostrarTodo(int valor_1,int valor_2,int suma, int resta, float division, int multiplicacion, int factorial_1,int factorial_2,char error_1[],char error_2[])
+{
+    printf("\n\t\tRESULTADOS\n");
+    printf("\n\tEl resultado de la suma es: %d",suma);
+    printf("\n\tEl resultado de la resta es: %d",resta);
+    ValidarDivision (valor_2,division,error_1);
+    printf("\n\tEl resultado de la multiplicacion es: %d",multiplicacion);
+    ValidarFactorial(valor_1,factorial_1,error_2);
+    ValidarFactorial(valor_2,factorial_2,error_2);
+    printf("\n\n");
 
 }
