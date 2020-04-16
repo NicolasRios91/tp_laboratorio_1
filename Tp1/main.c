@@ -5,8 +5,8 @@
 
 int main()
 {
-    int numeroUno=4;
-    int numeroDos=1;
+    int numeroUno=3;
+    int numeroDos=2;
     int suma;
     int resta;
     float division;
@@ -41,7 +41,6 @@ do
                 break;
             case 3:
                 suma = funcionSuma(numeroUno,numeroDos);
-                //system("CLS");
                 break;
             case 4:
                 resta = funcionResta(numeroUno,numeroDos);
@@ -57,7 +56,7 @@ do
              factorialB= funcionFactorial(numeroDos);
                 break;
             case 8:
-            MostrarTodo(numeroUno,numeroDos,suma,resta,division,multiplicacion,factorialA,factorialB,"\nNo se puede dividir por 0","\nNo se puede factorear un numero negativo");
+            MostrarTodo(numeroUno,numeroDos,suma,resta,division,multiplicacion,factorialA,factorialB,"\n\tNo se puede dividir por 0","\n\tNo se puede factorear un numero negativo");
                 break;
 
         }

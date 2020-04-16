@@ -11,4 +11,6 @@ float funcionDivision (int,int);
 int funcionMultiplicacion(int,int);
 int funcionFactorial(int);
 int IngresarNumero ();
-void MostrarTodo(int numeroDos,int numeroUno,int suma, int resta, float division, int multiplicacion, int factorialA,int factorialB,char error1[],char error2);
+void MostrarTodo(int valor1,int valor2,int suma, int resta, float division, int multiplicacion, int factorial1,int factorial2,char error1[],char error2[]);
+int ValidarDivision (int valor);
+int ValidarFactorial(int valor);

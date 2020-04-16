@@ -1,11 +1,21 @@
 
 
-int Validar (int valor2)
+int ValidarDivision (int valor)
 {
     int valorDeRetorno=1;
-    if (valor2==0)
+    if (valor==0)
     {
-        valorDeRetorno = 0;
+        valorDeRetorno = 0;//Entra al mensaje de error cuando el segundo valor de la division es 0
+    }
+    return valorDeRetorno;
+}
+
+int ValidarFactorial(int valor)
+{
+    int valorDeRetorno=1;
+    if (valor <0)
+    {
+        valorDeRetorno=0;//igual que el error de la division solo cambia la logica
     }
     return valorDeRetorno;
 }
@@ -34,6 +44,7 @@ int funcionMultiplicacion (int valor1,int valor2)
 
 float funcionDivision (int valor1,int valor2)
 {
+
     float resultado;
     if(valor2!=0)
     {
@@ -44,19 +55,19 @@ float funcionDivision (int valor1,int valor2)
 }
 
 
-int funcionFactorial (int valor1)
+int funcionFactorial (int valor)
 {
     int i;
     int resultado=1;
-    if (valor1 >-1)
+
+    if (valor >-1)
     {
-        for (i=valor1;i>0;i--)
+        for (i=valor;i>0;i--)
         {
             resultado = resultado*i;
         }
+        return resultado;
     }
-
-    return resultado;
 
 }
 
@@ -68,14 +79,45 @@ int IngresarNumero ()
     return valorA;
 }
 
-void MostrarTodo(int numeroUno,int numeroDos,int suma, int resta, float division, int multiplicacion, int factorialA,int factorialB,char error1[],char error2)
+void MostrarTodo(int valor1,int valor2,int suma, int resta, float division, int multiplicacion, int factorial1,int factorial2,char error1[],char error2[])
 {
-    int i=numeroDos;
+    int validarFactorial1;
+    int validarFactorial2;
+    int validarDivision;
     printf("\n\tsuma %d",suma);
     printf("\n\tresta %d",resta);
-    printf("\n\tdivision %2.f",division);
+/////////
+    validarDivision = ValidarDivision(valor2);
+    validarFactorial1 = ValidarFactorial(valor1);
+    validarFactorial2 = ValidarFactorial(valor2);
+    if (validarDivision ==0)
+    {
+        printf("\n\t%s",error1);
+    }
+    else
+    {
+        printf("\n\tdivision %.2f",division);
+    }
     printf("\n\tMultiplicacion %d",multiplicacion);
-    printf("\n\tFactorial %d es %d", numeroUno,factorialA);
-    printf("\n\tFactorial %d es %d", numeroDos,factorialB);
+//////////
+
+    if (validarFactorial1==1)
+    {
+        printf("\n\tFactorial %d es %d", valor1,factorial1);
+
+    }
+    else
+    {
+            printf("\n\t%s",error2);
+    }
+    if (validarFactorial2==1)
+    {
+        printf("\n\tFactorial %d es %d", valor2,factorial2);
+
+    }
+    else
+    {
+            printf("\n\t%s",error2);
+    }
 
 }
