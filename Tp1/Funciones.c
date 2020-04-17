@@ -1,29 +1,10 @@
 
-
-void ValidarDivision (int valor,float division,char error[])//Recibe el segundo operando, y el valor de retorno de la funcion SacarDivision(si devuelvió),muestra error o el resultado segun correspond
+int IngresarNumero ()//para no repetir el codigo 2 veces en el main
 {
-    if (valor ==0)
-    {
-        printf("\n\t%s",error);
-    }
-    else
-    {
-        printf("\n\tEl resultado de la division es: %.2f",division);
-    }
-}
-//
-void ValidarFactorial(int valor,int factorial,char error[])
-{
-
-    if (valor>-1)
-    {
-        printf("\n\tEl Factorial de %d es: %d", valor,factorial);
-
-    }
-    else
-    {
-            printf("\n\t%s",error);
-    }
+    int valorA;
+    printf("  Ingrese el valor: ");
+    scanf ("%d", &valorA);
+    return valorA;
 }
 
 //
@@ -59,8 +40,21 @@ float SacarDivision (int valor1,int valor2)
     {
         resultado = (float)valor1 /valor2;
         return resultado;
-    }
+    }//no agrego el else con el msj de error porque me lo mostraria al presionar la opcion 3, ni tampoco podria devolver y almacenar ese mensaje a una variable porque devuelve float.
 
+}
+//
+void ValidarDivision (int valor,float division,char error[])
+{
+    if (valor !=0)
+    {
+        printf("\n\tEl resultado de la division es: %.2f",division);
+
+    }
+    else//Si pongo este else en la funcion SacarDivision, me muestra el msj de error cuando se ingresa la opcion 3, por eso se agrega esta funcion y se la llama en MostrarResultados
+    {
+        printf("\n\t%s",error);
+    }
 }
 
 //
@@ -76,25 +70,31 @@ int SacarFactorial (int valor)
             resultado = resultado*i;
         }
         return resultado;
-    }
+    }//No se agrega el else con el msj de error, es el mismo inconveniente que tenia con la funcion SacarDivision
 
 }
-
 //
-int IngresarNumero ()
+void ValidarFactorial(int valor,int factorial,char error[])
 {
-    int valorA;
-    printf("  Ingrese el valor: ");
-    scanf ("%d", &valorA);
-    return valorA;
+
+    if (valor>-1)
+    {
+        printf("\n\tEl Factorial de %d es: %d", valor,factorial);
+
+    }
+    else//Igual que la funcion ValidarDivision
+    {
+            printf("\n\t%s",error);
+    }
 }
 
 //
+
 void MostrarMenu(int valor_1,int valor_2,int contador)
 {
-            switch(contador)
-            {
-                case 1:
+    switch(contador)
+    {
+            case 1://En primera instancia va a mostrar 'X,'Y'
                 printf("\t\t**CALCULADORA**\n");
                 printf("\n  1- Ingresar 1er operando (A=X)");
                 printf("\n  2- Ingresar 2do operando (B=Y)");
@@ -108,8 +108,8 @@ void MostrarMenu(int valor_1,int valor_2,int contador)
                 printf("\n  5- Salir\n");
                 printf("\n  Elija una opcion (1-5): ");
                 break;
-                case 2:
 
+            case 2://Luego de ingresar el primer numero se reemplaza 'X' por el primer operando
                 printf("\n  1- Ingresar 1er operando (A=%d)",valor_1);
                 printf("\n  2- Ingresar 2do operando (B=Y)");
                 printf("\n  3- Calcular todas la operaciones",valor_1);
@@ -123,8 +123,7 @@ void MostrarMenu(int valor_1,int valor_2,int contador)
                 printf("\n  Elija una opcion (1-5): ");
                 break;
 
-                default:
-
+            default://Muestra los valores cargados por el usuario, ya sea el primero, segundo, o si lo modifico
                 printf("\n  1- Ingresar 1er operando (A=%d)",valor_1);
                 printf("\n  2- Ingresar 2do operando (B=%d)",valor_2);
                 printf("\n  3- Calcular todas la operaciones");
@@ -137,12 +136,12 @@ void MostrarMenu(int valor_1,int valor_2,int contador)
                 printf("\n  5- Salir\n");
                 printf("\n  Elija una opcion (1-5): ");
                 break;
-                }
+    }
 
 }
 
 //
-void MostrarTodo(int valor_1,int valor_2,int suma, int resta, float division, int multiplicacion, int factorial_1,int factorial_2,char error_1[],char error_2[])
+void MostrarResultados(int valor_1,int valor_2,int suma, int resta, float division, int multiplicacion, int factorial_1,int factorial_2,char error_1[],char error_2[])
 {
     printf("\n\t\tRESULTADOS\n");
     printf("\n\tEl resultado de la suma es: %d",suma);
