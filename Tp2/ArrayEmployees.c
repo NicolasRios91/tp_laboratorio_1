@@ -160,3 +160,113 @@ int RemoveEmployee(Employee lista[],int tam, int id)
     }
     return retorno;
 }
+
+int SacarMaximoDeUnArrayPorId (Employee lista[],int tam)
+{
+    int maximo;
+    int iDnuevo;
+    int i;
+    for (i=0;i<tam;i++)
+    {
+        if (lista[i].id>maximo || i==0)
+        {
+            maximo = lista[i].id;
+        }
+    }
+    return maximo;
+}
+
+
+int ModifiyEmployee(Employee lista[],int tam)
+{
+    int retorno;
+    int opcion;
+    int idEncontrado;
+    int id;
+    Employee auxiliar;
+    char respuesta;
+
+    do
+    {
+        do
+        {
+        printf("\nIngrese el ID del empleado que desea modificar");
+        scanf("%d",&id);
+        idEncontrado = FindEmployee(lista,tam,id);
+        if (idEncontrado!=-1)
+        {
+            printf("\nSe encontró el siguiente empleado:");
+            PrintEmployee(lista[idEncontrado]);
+            auxiliar = lista[idEncontrado];
+            printf("\nQue desea realizar?");
+            respuesta='s';
+            break;
+        }
+        else
+        {
+            printf("\nNo se encontro el empleado, desea buscar otro?");
+            fflush(stdin);
+            scanf("%c",&respuesta);
+        }
+        }while(respuesta =='s');
+
+        if (respuesta=='s')
+
+            do
+            {
+            printf("\n1_Modificar nombre");
+            printf("\n2_Modificar apellido");
+            printf("\n3_Modificar salario");
+            printf("\n4_Modificar sector");
+            printf("\n5_Aplicar cambios");
+            printf("\n6_Modificar otro empleado");
+            printf("\n7_Salir al menu principal");
+            printf("\nElija una opcion: ");
+            scanf("%d",&opcion);
+            if (opcion==7)
+            {
+                break;
+            }
+            switch(opcion)
+            {
+                case 1:
+                    strcpy(auxiliar.name,getStr("\nIngrese el nuevo nombre: ","\nIngrese un nombre valido; "));
+                    //printf("el nuevo nombre será %s",str);
+                    //printf("Confirma el cambio? s/n");
+                    //scanf("%c",&respuesta);
+                break;
+                case 2:
+                    strcpy(auxiliar.lastName,getStr("\nIngrese el nuevo apellido: ","\nIngrese un apellido valido: "));
+                break;
+                case 3:
+                    auxiliar.salary = getFloat("Ingrese el nuevo salario","El salario no es valido, ingrese uno correcto: ");
+                break;
+                case 4:
+                    auxiliar.sector = getInt("Ingrese el nuevo sector","El sector ingresado no es valido,ingrese uno correcto: ");
+                    break;
+                case 5:
+                    printf("\nDesea aplicar los cambios? s/n");
+                    fflush(stdin);
+                    scanf("%c",&respuesta);
+                    if (respuesta='s')
+                    {
+                        lista[idEncontrado] = auxiliar;
+                        printf("\nSe realizaron los cambios");
+                    }
+                    else
+                    {
+                        printf("\nLos cambios fueron cancelados");
+                    }
+                    break;
+                case 6:
+                    break;
+                default:
+                        printf("\nIngrese una opcion correcta");
+                    break;
+            }
+            }while(opcion!=6);
+
+        //}
+
+    }while(respuesta == 's' && opcion==6);//se hace mientras la respuesta sea por SI Y LA OPCION SEA distinta 7
+}

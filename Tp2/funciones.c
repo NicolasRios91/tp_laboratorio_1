@@ -62,17 +62,4 @@ int SacarMaximo(int valor1,int control)
     return maximo;
 }
 
-int SacarMaximoDeUnArrayPorId (Employee lista[],int tam)
-{
-    int maximo;
-    int iDnuevo;
-    int i;
-    for (i=0;i<tam;i++)
-    {
-        if (lista[i].id>maximo || i==0)
-        {
-            maximo = lista[i].id;
-        }
-    }
-    return maximo;
-}
+

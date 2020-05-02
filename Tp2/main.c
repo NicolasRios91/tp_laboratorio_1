@@ -14,9 +14,9 @@ int main()
     int opcion;
     int id;
     int altas=0;
-    Employee empleados[T];//={{01,"Dante","Milazzo",0,1,1},{02,"Dante","vargas",250,5,1},{03,"Dante","asdasd",750,2,1}};
+    Employee empleados[T]={{01,"Dante","Milazzo",0,1,1},{02,"Dante","vargas",250,5,1},{03,"Dante","asdasd",750,2,1}};
 
-   r2 = InitEmployees(empleados,T);
+   //r2 = InitEmployees(empleados,T);
 /*
         fflush(stdin);
         strcpy(name,getStr("ingrese el nombre","ponga el apellido"));
@@ -33,7 +33,8 @@ int main()
             printf("\n2_Buscar");
             printf("\n3_Eliminar");
             printf("\n4_Mostrar Empleados");
-            printf("\n5_Salir");
+            printf("\n5_Modificar");
+            printf("\n6_Salir");
             printf("\n\tElija una opcion");
             scanf("%d",&opcion);
             switch(opcion)
@@ -46,7 +47,7 @@ int main()
                 printf("\nIngrese la ID del empleado que busca");
                 scanf("%d",&id);
                 r = FindEmployee(empleados,T,id);
-                if (r!=-1)
+                if (r!=-1)//pasar a funcion ?!
                 {
                     printf("\nSe encontro");
                     PrintEmployee(empleados[id]);
@@ -67,8 +68,12 @@ int main()
                 {
                     printf("No hay empleados cargados");
                 }
+                break;
+                case 5:
+                    ModifiyEmployee(empleados,T);
+                    break;
             }
-        }while (opcion!=5);
+        }while (opcion!=6);
 
 
 
