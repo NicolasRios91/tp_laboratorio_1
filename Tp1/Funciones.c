@@ -143,6 +143,7 @@ void MostrarMenu(int valor_1,int valor_2,int contador)
 //
 void MostrarResultados(int valor_1,int valor_2,int suma, int resta, float division, int multiplicacion, int factorial_1,int factorial_2,char error_1[],char error_2[])
 {
+    system("cls");
     printf("\n\t\tRESULTADOS\n");
     printf("\n\tEl resultado de la suma es: %d",suma);
     printf("\n\tEl resultado de la resta es: %d",resta);
