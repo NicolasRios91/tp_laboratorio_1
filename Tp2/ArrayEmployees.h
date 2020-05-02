@@ -15,7 +15,7 @@ typedef struct
 
 
 void PrintEmployee(Employee lista);
-void PrintEmployees(Employee lista[], int tam);
+int PrintEmployees(Employee lista[], int tam);
 
 
 
@@ -30,7 +30,8 @@ void ValidarCadena (char str[], char error[]);
 int CargarEmpleado(Employee lista[],int tam,int idAnterior,char msj[],char error[]);
 
 int GenerarId(Employee lista[],int tam, int idAnterior);
-
+int FindEmployee(Employee lista[],int tam, int id);
+int RemoveEmployee(Employee lista[],int tam, int id);
 
 
 #endif // ARRAYEMPLOYEES_H_INCLUDED

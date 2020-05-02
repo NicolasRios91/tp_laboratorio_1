@@ -6,6 +6,7 @@
 
 void PrintEmployee(Employee lista)
 {
+
     if(lista.isEmpty == OCUPADO)
     {
         printf("\n%8d %8s %8s %4.2f %8d %8d", lista.id,
@@ -14,20 +15,27 @@ void PrintEmployee(Employee lista)
                                             lista.salary,
                                             lista.sector,
                                             lista.isEmpty);
+
     }
+
 }
 
 
 
 
-void PrintEmployees(Employee lista[], int tam)
+int PrintEmployees(Employee lista[], int tam)
 {
+    int retorno=-1;
     int i;
     for (i=0;i<tam;i++)
     {
-        PrintEmployee(lista[i]);
+        if(lista[i].isEmpty == OCUPADO)
+        {
+          PrintEmployee(lista[i]);
+          retorno=0;
+        }
     }
-    return 0;
+    return retorno;
 }
 
 int InitEmployees (Employee lista[],int tam)
@@ -75,7 +83,7 @@ int addEmployee(Employee lista[],int tam,int idAnterior,char name[],char lastNam
     {
 
         //idNuevo = GenerarId(lista,tam,idAnterior);
-        lista[indiceEncontrado].id = idAnterior++;
+        lista[indiceEncontrado].id = idAnterior+1;
         strcpy(lista[indiceEncontrado].name,name);
         strcpy(lista[indiceEncontrado].lastName,lastName);
         lista[indiceEncontrado].salary = salary;
@@ -121,3 +129,34 @@ int CargarEmpleado(Employee lista[],int tam,int idAnterior,char msj[],char error
 }
 
 
+int FindEmployee(Employee lista[],int tam, int id)
+{
+    int i;
+    int retorno=-1;
+    for (i=0;i<tam;i++)
+    {
+        if (lista[i].id == id && lista[i].isEmpty == OCUPADO)
+        {
+            retorno = i;
+            break;
+        }
+    }
+    return retorno;
+}
+
+int RemoveEmployee(Employee lista[],int tam, int id)
+{
+    int retorno=-1;
+    int indice = FindEmployee(lista,tam,id);
+    if (indice!=-1)
+    {
+        printf("se elimino el empleado");
+        lista[indice].isEmpty=LIBRE;
+        retorno=1;
+    }
+    else
+    {
+        printf("No existe id");
+    }
+    return retorno;
+}
