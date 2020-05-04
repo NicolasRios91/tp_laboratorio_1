@@ -1,20 +1,21 @@
 # depslib dependency file v1.0
-1588460045 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.c
+1588569937 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.c
 	"ArrayEmployees.h"
 	"funciones.h"
 	<stdio.h>
+	<string.h>
 
-1588434954 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\main.c
+1588539382 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\main.c
 	<stdio.h>
 	<stdlib.h>
 	"ArrayEmployees.h"
 	"funciones.h"
 
-1588381831 c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.h
+1588540221 c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.h
 
-1588434369 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.c
+1588569459 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.c
 	<stdio.h>
-	"ArrayEmployees.h"
+	<string.h>
 
-1588376472 c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.h
+1588569488 c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.h
 

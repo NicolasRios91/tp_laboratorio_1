@@ -1,6 +1,7 @@
 #include "ArrayEmployees.h"
 #include "funciones.h"
 #include <stdio.h>
+#include <string.h>
 #define LIBRE 0
 #define OCUPADO 1
 
@@ -9,7 +10,7 @@ void PrintEmployee(Employee lista)
 
     if(lista.isEmpty == OCUPADO)
     {
-        printf("\n%8d %8s %8s %4.2f %8d %8d", lista.id,
+        printf("\n%8d %4s %4s %4.2f %8d %8d", lista.id,
                                             lista.name,
                                             lista.lastName,
                                             lista.salary,
@@ -65,7 +66,20 @@ int BuscarLibre(Employee lista[],int tam)
    }
    return indice;
 }
-
+/*
+void ConvertirPrimerCaracterStrMayus(Employee lista,int tam)
+{
+    int i;
+    strlwr(lista.name);
+    for(i=-1;i<tam;i++)
+    {
+        if (lista.name[i] = " " || i==-1)
+        {
+            toupper(lista.name[i+1]);
+        }
+    }
+}
+*/
 int GenerarId(Employee lista[],int tam, int idAnterior)
 {
    int IdNuevo;
@@ -98,23 +112,38 @@ int addEmployee(Employee lista[],int tam,int idAnterior,char name[],char lastNam
 
 
 
-int CargarEmpleado(Employee lista[],int tam,int idAnterior,char msj[],char error[])
+int CargarEmpleado(Employee lista[],int tam,int generadorID,char msj[],char error[])
 {
     int retorno;
-    int idNuevo = idAnterior;
-    char name[51];
-    char lastName[51];
+    int idNuevo = generadorID;
+    char name[ELEMENTOSARRAY];
+    char lastName[ELEMENTOSARRAY];
     float salary;
     int sector;
 
+        do
+        {
+            retorno = getStr ("\nIngrese el nombre: ","\nERROR: El nombre es muy largo",name,ELEMENTOSARRAY);
+        }while (retorno!=0);
+        ConvertirPrimerCaracterStrMayus(name);
 
-        fflush(stdin);
-        strcpy(name,getStr("\ningrese el nombre","\nel nombre es muy largo"));
-        fflush(stdin);
-        strcpy(lastName,getStr("\ningrese el apellido","\n mal dato"));
-        salary = getFloat("ingrese el salario","Mal dato");
-        sector = getInt("Ingrese el sector","Sector invalido");
-        retorno = addEmployee(lista,tam,idAnterior,name,lastName,salary,sector);
+        do
+        {
+            retorno = getStr ("Ingrese el apellido: ","ERROR: El apellido es muy largo, ingrese uno valido: ",lastName,ELEMENTOSARRAY);
+        }while (retorno!=0);
+        ConvertirPrimerCaracterStrMayus(lastName);
+
+        do
+        {
+            salary = getFloat("ingrese un salario valido: ");
+        }while (salary<1);
+
+        do
+        {
+            sector = getInt("Ingrese un sector valido: ");
+        }while (sector <1);
+
+        retorno = addEmployee(lista,tam,idNuevo,name,lastName,salary,sector);
         if (retorno!=-1)
         {
            idNuevo++;
@@ -164,7 +193,7 @@ int RemoveEmployee(Employee lista[],int tam, int id)
 int SacarMaximoDeUnArrayPorId (Employee lista[],int tam)
 {
     int maximo;
-    int iDnuevo;
+    //int iDnuevo;
     int i;
     for (i=0;i<tam;i++)
     {
@@ -177,6 +206,8 @@ int SacarMaximoDeUnArrayPorId (Employee lista[],int tam)
 }
 
 
+
+
 int ModifiyEmployee(Employee lista[],int tam)
 {
     int retorno;
@@ -184,13 +215,18 @@ int ModifiyEmployee(Employee lista[],int tam)
     int idEncontrado;
     int id;
     Employee auxiliar;
+    int auxInt;
+    float auxFloat;
     char respuesta;
-
+    char respuestaSwitch;
+    //char auxStr[51];
+    int cambios;
     do
     {
         do
         {
-        printf("\nIngrese el ID del empleado que desea modificar");
+        cambios=0;
+        printf("\nIngrese el ID del empleado que desea modificar: ");
         scanf("%d",&id);
         idEncontrado = FindEmployee(lista,tam,id);
         if (idEncontrado!=-1)
@@ -204,9 +240,15 @@ int ModifiyEmployee(Employee lista[],int tam)
         }
         else
         {
-            printf("\nNo se encontro el empleado, desea buscar otro?");
+            printf("No se encontró ningún empleado, desea buscar otro? s/n: ");
             fflush(stdin);
-            scanf("%c",&respuesta);
+            respuesta = getchar();
+            while(respuesta!='s' && respuesta !='n')
+                {
+                   printf("\nIngrese  una respuesta valida s/n: ");
+                   fflush(stdin);
+                   respuesta = getchar();
+                }
         }
         }while(respuesta =='s');
 
@@ -214,14 +256,14 @@ int ModifiyEmployee(Employee lista[],int tam)
 
             do
             {
-            printf("\n1_Modificar nombre");
-            printf("\n2_Modificar apellido");
-            printf("\n3_Modificar salario");
-            printf("\n4_Modificar sector");
-            printf("\n5_Aplicar cambios");
-            printf("\n6_Modificar otro empleado");
-            printf("\n7_Salir al menu principal");
-            printf("\nElija una opcion: ");
+            printf("\n  1_Modificar nombre");
+            printf("\n  2_Modificar apellido");
+            printf("\n  3_Modificar salario");
+            printf("\n  4_Modificar sector");
+            printf("\n  5_Aplicar cambios");
+            printf("\n  6_Modificar otro empleado");
+            printf("\n  7_Salir al menu principal");
+            printf("\n  Elija una opcion: ");
             scanf("%d",&opcion);
             if (opcion==7)
             {
@@ -230,32 +272,108 @@ int ModifiyEmployee(Employee lista[],int tam)
             switch(opcion)
             {
                 case 1:
-                    strcpy(auxiliar.name,getStr("\nIngrese el nuevo nombre: ","\nIngrese un nombre valido; "));
+                        retorno = getStr("Ingrese el nuevo nombre: ","Error: El nombre ingresado era muy largo ",auxiliar.name,51);
+                        if (retorno!=-1)
+                        {
+                            ConvertirPrimerCaracterStrMayus(auxiliar.name);
+                            cambios=cambios+1;
+                        }
+
+                   // getStr("Ingrese el nuevo nombre: ",auxiliar.name,ELEMENTOSARRAY);
+                    //validarTodo("Ingrese el nuevo nombre","El nombre excede","Desea probar otro nombre?",auxiliar.name);
+                    /*
+                    do
+                    {
+                        fflush(stdin);
+                        strcpy(auxiliar.name,getStr("\nIngrese el nuevo nombre: "));
+                        retorno = ValidarCadena (auxiliar.name,"\nERROR: El nombre excede los caracteres permitidos");
+                        if (retorno==0)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            printf("\nDesea ingresar otro nombre? s/n");
+                            fflush(stdin);
+                            scanf("%c",&respuestaSwitch);
+                        }
+                    }while (retorno==-1 && respuestaSwitch=='s');
+                    */
+                    //ValidarCadena(*auxiliar.name,"\nMal dato: ");
                     //printf("el nuevo nombre será %s",str);
                     //printf("Confirma el cambio? s/n");
                     //scanf("%c",&respuesta);
+
+
                 break;
                 case 2:
-                    strcpy(auxiliar.lastName,getStr("\nIngrese el nuevo apellido: ","\nIngrese un apellido valido: "));
+                        retorno = getStr("Ingrese el nuevo apellido: ","Error: El apellido ingresado es muy largo",auxiliar.lastName,51);
+                        if (retorno!=0)
+                        {
+                            ConvertirPrimerCaracterStrMayus(auxiliar.lastName);
+                            cambios=cambios+1;
+                        }
+
+                        //printf("\n%s",auxiliar.lastName);
+                        //auxiliar.lastName()
+                        /*strcpy(auxStr,"");
+                        printf("Ingrese el nuevo apellido: ");
+                        fflush(stdin);
+                        fgets(auxStr,51,stdin);
+                        auxStr[strlen(auxStr)-1]='\0';
+                        strcpy(auxiliar.lastName,auxStr);
+*/
+
                 break;
                 case 3:
-                    auxiliar.salary = getFloat("Ingrese el nuevo salario","El salario no es valido, ingrese uno correcto: ");
+                    auxFloat = getFloat("\nIngrese el nuevo salario");//si no declaro auxFloat, guardaria el retorno en auxiliar.salary aunque sea negativo, y despues lo aplica en los cambios
+                    if (auxFloat>0)
+                    {
+                        auxiliar.salary = auxFloat;
+                        cambios++;
+                    }
+                    else
+                    {
+                        printf("Error: Salario invalido\n");
+                    }
                 break;
                 case 4:
-                    auxiliar.sector = getInt("Ingrese el nuevo sector","El sector ingresado no es valido,ingrese uno correcto: ");
+                    auxInt = getInt("\nIngrese el nuevo sector: ");
+                    if (auxInt>0)
+                    {
+                        auxiliar.sector = auxInt;
+                        cambios++;
+                    }
+                    else
+                    {
+                        printf("\nError: Sector invalido");
+                    }
                     break;
                 case 5:
+                    if (cambios!=0)
+                    {
+                    PrintEmployee(lista[idEncontrado]);
+                    printf("\nCambia a :");
+                    PrintEmployee(auxiliar);
                     printf("\nDesea aplicar los cambios? s/n");
+
                     fflush(stdin);
-                    scanf("%c",&respuesta);
-                    if (respuesta='s')
+                    respuestaSwitch = getchar();
+                    if (respuestaSwitch=='s')
                     {
                         lista[idEncontrado] = auxiliar;
                         printf("\nSe realizaron los cambios");
+                        cambios=0;
                     }
                     else
                     {
                         printf("\nLos cambios fueron cancelados");
+                        cambios=0;
+                    }
+                    }
+                    else
+                    {
+                        printf("No hay cambios para aplicar");
                     }
                     break;
                 case 6:
@@ -268,5 +386,6 @@ int ModifiyEmployee(Employee lista[],int tam)
 
         //}
 
-    }while(respuesta == 's' && opcion==6);//se hace mientras la respuesta sea por SI Y LA OPCION SEA distinta 7
+    }while(respuesta == 's' && opcion==6);//se hace mientras la respuesta sea por SI  Y LA OPCION SEA modificar otro empleado (6)
+
 }

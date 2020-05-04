@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+//#include <string.h>
 #include "ArrayEmployees.h"
 #include "funciones.h"
 #define T 3
@@ -14,7 +15,7 @@ int main()
     int opcion;
     int id;
     int altas=0;
-    Employee empleados[T]={{01,"Dante","Milazzo",0,1,1},{02,"Dante","vargas",250,5,1},{03,"Dante","asdasd",750,2,1}};
+    Employee empleados[T]={{1,"radamantis","PEREZ",0,1,1},{2,"BART","vargas",250,5,1},{3,"Dante","V",750,2,1}};
 
    //r2 = InitEmployees(empleados,T);
 /*
@@ -40,7 +41,7 @@ int main()
             switch(opcion)
             {
                 case 1:
-                generadorId = CargarEmpleado(empleados,T,generadorId,"El empleado se cargo exitosamente","No se puedo cargar al empleado");
+                generadorId = CargarEmpleado(empleados,T,generadorId,"El empleado se cargo exitosamente","No se pudo cargar al empleado");
                 break;
                 altas++;
                 case 2:
@@ -50,7 +51,7 @@ int main()
                 if (r!=-1)//pasar a funcion ?!
                 {
                     printf("\nSe encontro");
-                    PrintEmployee(empleados[id]);
+                    PrintEmployee(empleados[r]);
                 }
                 else
                 {
