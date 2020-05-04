@@ -3,21 +3,23 @@
 //#include <string.h>
 #include "ArrayEmployees.h"
 #include "funciones.h"
-#define T 3
+#define T 5
 
 
 int main()
 {
-    int global=-1;
+
     int r;
     int r2;
+    float promedioSalario;
+    int contadorSalario;
     int generadorId=0;
     int opcion;
     int id;
     int altas=0;
-    Employee empleados[T]={{1,"radamantis","PEREZ",0,1,1},{2,"BART","vargas",250,5,1},{3,"Dante","V",750,2,1}};
+    Employee empleados[T]={{1,"radamantis","Apellido",100,7,1},{2,"BART","VERGIL",100,5,1},{3,"Dante","VERGIL",100,2,1}};
 
-   //r2 = InitEmployees(empleados,T);
+    r2 = InitEmployees(empleados,T);
 /*
         fflush(stdin);
         strcpy(name,getStr("ingrese el nombre","ponga el apellido"));
@@ -35,7 +37,10 @@ int main()
             printf("\n3_Eliminar");
             printf("\n4_Mostrar Empleados");
             printf("\n5_Modificar");
-            printf("\n6_Salir");
+            printf("\n6_Ordenar alfabeticamente");
+            printf("\n7_Ordenar por sector");
+            printf("\n8_Salario Total y promedio");
+            printf("\n9_Salir");
             printf("\n\tElija una opcion");
             scanf("%d",&opcion);
             switch(opcion)
@@ -73,8 +78,25 @@ int main()
                 case 5:
                     ModifiyEmployee(empleados,T);
                     break;
+                case 6:
+                    OrdenarAscendentemente(empleados,T);
+                    break;
+                case 7:
+                    OrdenarPorSector(empleados,T);
+                    break;
+                case 8:
+                    promedioSalario = SacarPrommedio (empleados,T);
+                    contadorSalario = SacarEmpleadosMayorAlPromedio(empleados,T,promedioSalario);
+                    if (contadorSalario>0)
+                    {
+                        printf("\nCantidad de empleados que superan el salario promedio: %d",contadorSalario);
+                    }
+                    else
+                    {
+                        printf("\nNingun empleado supera el salario promedio");
+                    }
             }
-        }while (opcion!=6);
+        }while (opcion!=9);
 
 
 

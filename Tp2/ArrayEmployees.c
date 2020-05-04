@@ -10,7 +10,7 @@ void PrintEmployee(Employee lista)
 
     if(lista.isEmpty == OCUPADO)
     {
-        printf("\n%8d %4s %4s %4.2f %8d %8d", lista.id,
+        printf("\n%8d %12s %12s %4.2f %4d %4d", lista.id,
                                             lista.name,
                                             lista.lastName,
                                             lista.salary,
@@ -129,7 +129,7 @@ int CargarEmpleado(Employee lista[],int tam,int generadorID,char msj[],char erro
 
         do
         {
-            retorno = getStr ("Ingrese el apellido: ","ERROR: El apellido es muy largo, ingrese uno valido: ",lastName,ELEMENTOSARRAY);
+            retorno = getStr ("Ingrese el apellido: ","\nERROR: El apellido es muy largo",lastName,ELEMENTOSARRAY);
         }while (retorno!=0);
         ConvertirPrimerCaracterStrMayus(lastName);
 
@@ -208,7 +208,7 @@ int SacarMaximoDeUnArrayPorId (Employee lista[],int tam)
 
 
 
-int ModifiyEmployee(Employee lista[],int tam)
+void ModifiyEmployee(Employee lista[],int tam)
 {
     int retorno;
     int opcion;
@@ -235,7 +235,7 @@ int ModifiyEmployee(Employee lista[],int tam)
             PrintEmployee(lista[idEncontrado]);
             auxiliar = lista[idEncontrado];
             printf("\nQue desea realizar?");
-            respuesta='s';
+            //respuesta='s';
             break;
         }
         else
@@ -252,7 +252,7 @@ int ModifiyEmployee(Employee lista[],int tam)
         }
         }while(respuesta =='s');
 
-        if (respuesta=='s')
+        if (idEncontrado!=-1)
 
             do
             {
@@ -261,13 +261,14 @@ int ModifiyEmployee(Employee lista[],int tam)
             printf("\n  3_Modificar salario");
             printf("\n  4_Modificar sector");
             printf("\n  5_Aplicar cambios");
-            printf("\n  6_Modificar otro empleado");
-            printf("\n  7_Salir al menu principal");
+            printf("\n  6_Descartar cambios");
+            printf("\n  7_Modificar otro empleado");
+            printf("\n  8_Salir al menu principal");
             printf("\n  Elija una opcion: ");
             scanf("%d",&opcion);
-            if (opcion==7)
+            if (opcion==8)
             {
-                break;
+                break;//rompe el bucle para volver al menu principal
             }
             switch(opcion)
             {
@@ -359,33 +360,115 @@ int ModifiyEmployee(Employee lista[],int tam)
 
                     fflush(stdin);
                     respuestaSwitch = getchar();
-                    if (respuestaSwitch=='s')
-                    {
-                        lista[idEncontrado] = auxiliar;
-                        printf("\nSe realizaron los cambios");
-                        cambios=0;
-                    }
-                    else
-                    {
-                        printf("\nLos cambios fueron cancelados");
-                        cambios=0;
-                    }
-                    }
+                        if (respuestaSwitch=='s')
+                        {
+                            lista[idEncontrado] = auxiliar;
+                            printf("\nSe realizaron los cambios");
+                            cambios=0;
+                        }
+                        else
+                        {
+                            printf("\nLos cambios no se realizaron");
+                        }
+                        }
                     else
                     {
                         printf("No hay cambios para aplicar");
                     }
                     break;
                 case 6:
+                        printf("Seguro que quiere descartar los cambios? s / n: ");
+                        fflush(stdin);
+                        respuestaSwitch=getchar();
+                        if (respuestaSwitch=='s')
+                            {
+                                cambios=0;
+                                printf("Los cambios fueron descartados");
+                            }
                     break;
+                case 7:
+                    break;//para evitar el msj default cuando ingrese 7
                 default:
                         printf("\nIngrese una opcion correcta");
                     break;
             }
-            }while(opcion!=6);
+            }while(opcion!=7);
 
         //}
 
-    }while(respuesta == 's' && opcion==6);//se hace mientras la respuesta sea por SI  Y LA OPCION SEA modificar otro empleado (6)
+    }while(opcion==7 && respuesta !='n');//Se vuelve a pedir una ID, siempre que: el usuario no responda "n" y la opcion del menu elegida sea la 7
+    //Al entrar al menu "respuesta" esta vacio, o es 's' en caso de haber ingresado mal un id
+    //y luego haber puesto uno correcto(ya que tuvo que responder 's' si queria ingresar uno nuevo)
+    //por eso al poner 7 en el menu (modificar otro usuario), se cumplen las 2 condiciones y se repite el bucle
+}
 
+
+void OrdenarAscendentemente(Employee lista[],int tam)//A-Z y de mayor a menor los sectores
+{
+    int i;
+    int j;
+    Employee aux;
+    for (i=0;i<tam-1;i++)
+    {
+        for (j=1;j<tam;j++)
+        {
+            //primero evalua si un apellido es "mayor" que otro, sino de ser iguales los ordena por sector
+            if (strcmp(lista[i].lastName,lista[j].lastName)>0 || (strcmp(lista[i].lastName,lista[j].lastName)==0 && lista[i].sector > lista[j].sector))//si el primero es mayor devuelve 1, si es menor -1
+            {
+                aux = lista[i];
+                lista[i]=lista[j];
+                lista[j]=aux;
+            }
+        }
+    }
+}
+
+void OrdenarPorSector(Employee lista[],int tam)
+{
+    int i;
+    int j;
+    Employee aux;
+    for (i=0;i<tam-1;i++)
+    {
+        for (j=1;j<tam;j++)
+        {
+            //como primera condicion evalua si un sector es mayor que otro, sino de ser iguales evalua el apellido para establecer un orden por apellido
+            if (lista[i].sector > lista[j].sector || (lista[i].sector == lista[j].sector && strcmp(lista[i].lastName,lista[j].lastName)>0))
+            {
+                aux = lista[i];
+                lista[i]=lista[j];
+                lista[j]=aux;
+            }
+
+        }
+    }
+}
+
+float SacarPrommedio (Employee lista[],int tam)
+{
+    float PromedioSalario;
+    int i;
+    float acumuladorSalario=0;
+    for (i=0;i<tam;i++)
+    {
+        acumuladorSalario+=lista[i].salary;
+    }
+    PromedioSalario= acumuladorSalario/tam;
+    printf("\nTotal de los salarios: %.2f",acumuladorSalario);
+    printf("\nPromedio de salario: %.2f",PromedioSalario);
+    return PromedioSalario;
+}
+
+int SacarEmpleadosMayorAlPromedio(Employee lista[], int tam, float promedio)
+{
+    int i;
+    int cantidad=0;
+    for (i=0;i<tam;i++)
+    {
+        if (lista[i].salary > promedio)
+        {
+            cantidad++;
+        }
+    }
+    return cantidad;
 }

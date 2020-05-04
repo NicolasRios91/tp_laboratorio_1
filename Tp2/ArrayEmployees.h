@@ -31,8 +31,13 @@ int CargarEmpleado(Employee lista[],int tam,int idAnterior,char msj[],char error
 
 int GenerarId(Employee lista[],int tam, int idAnterior);
 int FindEmployee(Employee lista[],int tam, int id);
+void ModifiyEmployee(Employee lista[],int tam);
 int RemoveEmployee(Employee lista[],int tam, int id);
+void OrdenarAscendentemente(Employee lista[],int tam);
+void OrdenarPorSector(Employee lista[],int tam);
 
+float SacarPrommedio (Employee lista[],int tam);
+int SacarEmpleadosMayorAlPromedio(Employee lista[], int tam, float promedio);
 //void ConvertirPrimerCaracterStrMayus(Employee lista,int tam);
 
 #endif // ARRAYEMPLOYEES_H_INCLUDED
