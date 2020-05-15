@@ -1,22 +1,35 @@
-//#include "ArrayEmployees.h"
-#include <stdio.h>
-#include <string.h>
-//#include "ArrayEmployees.h"
-#define LIBRE 0
-#define OCUPADO 1
+#include "funciones.h"
 
 
 
 
 
-
-
-int ValidarCadena (char str[],int size)// si es menor (valido) devuelve 0
+int ValidarCadena (char str[],int size,char error[])// si es menor (valido) devuelve 0
 {
     int retorno=0;
     if (strlen(str)>size)
     {
         retorno=-1;
+        printf("%s",error);
+    }
+    return retorno;
+}
+
+int getStr (char msj[],char dato[], int size)
+{
+
+    int retorno;
+    char str[100];
+    printf("%s",msj);
+
+    fflush(stdin);
+    fgets(str,100,stdin);
+    str[strlen(str)-1]='\0';
+
+    retorno = ValidarCadena (str,size,"ERROR: El nombre es muy largo\n");
+    if(retorno!=-1)
+    {
+        CopiarStrValidado(dato,str);
     }
     return retorno;
 }
@@ -37,41 +50,14 @@ void ConvertirPrimerCaracterStrMayus(char lista[])
 }
 
 
-int getStr (char msj[],char error[],char dato[], int size)
-{
-    int retorno;
-    int largo=0;
-    char str[100];
-    printf("%s",msj);
-
-    fflush(stdin);
-    fgets(str,100,stdin);
-    largo= strlen(str);
-    str[strlen(str)-1]='\0';
-    printf("%d",largo);
-
-    retorno = ValidarCadena (str,size);
-    if (retorno!=-1)
-        {
-            strcpy(dato,str);
-        }
-        else
-        {
-            printf("%s",error);
-        }
-    return retorno;
-//ValidarCadena(str,error);
-}
-
-
-
 float getFloat(char msj[])
 {
-    float salary;
-    printf("\n%s",msj);
-    scanf("%f",&salary);
-    return salary;
+    float valor;
+    printf("%s",msj);
+    scanf("%f",&valor);
+    return valor;
 }
+
 int ValidarSalario(float valor,int parametro)
 {
     int retorno=0;
@@ -81,10 +67,21 @@ int ValidarSalario(float valor,int parametro)
     }
     return retorno;
 }
+
+int ValidarSector(int valor, int parametro)
+{
+    int retorno=0;
+    if (valor<parametro)
+    {
+        retorno=-1;
+    }
+    return retorno;
+}
+
 int getInt (char msj[])
 {
     int valor;
-    printf("\n%s",msj);
+    printf("%s",msj);
     scanf("%d",&valor);
     return valor;
 }
@@ -100,24 +97,10 @@ int SacarMaximo(int valor1,int control)
     return maximo;
 }
 
-
-/*
-void validarTodo(char msj[],char msjError[],char confirma[],char str[])
+void CopiarStrValidado(char cadenaDestino[],char cadenaOrigen[])
 {
-    int retorno;
-    char respuesta;
-    do
-    {
-    //fflush(stdin);
-    strcpy(str,getStr(msj));
-    retorno = ValidarCadena(str,msjError);
-    if (retorno==0)
-    {
-        break;
-    }
-    else
-    {
-        respuesta=getChar(confirma);
-    }
-    }while(retorno==-1 && respuesta=='s');
-}*/
+    strcpy(cadenaDestino,cadenaOrigen);
+    ConvertirPrimerCaracterStrMayus(cadenaDestino);
+}
+
+

@@ -1,21 +1,29 @@
 # depslib dependency file v1.0
-1588618595 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.c
+1589582674 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.c
 	"ArrayEmployees.h"
-	"funciones.h"
-	<stdio.h>
-	<string.h>
 
-1588618764 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\main.c
+1589582734 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\main.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
+	<conio.h>
 	"ArrayEmployees.h"
+
+1589581727 c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.h
+	"funciones.h"
+	"menu.h"
+	<stdio.h>
+
+1589577922 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.c
 	"funciones.h"
 
-1588617393 c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.h
-
-1588569459 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.c
+1589577632 c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.h
 	<stdio.h>
 	<string.h>
 
-1588569488 c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.h
+1589578956 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\menu.c
+	"Menu.h"
+
+1589568966 c:\users\nico\desktop\tp_laboratorio_1\tp2\menu.h
+	<stdio.h>
 
