@@ -1,29 +1,32 @@
 # depslib dependency file v1.0
-1589582674 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.c
+1589596227 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.c
 	"ArrayEmployees.h"
 
-1589582734 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\main.c
-	<stdio.h>
+1589597614 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\main.c
 	<stdlib.h>
-	<string.h>
-	<conio.h>
 	"ArrayEmployees.h"
 
-1589581727 c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.h
+1589598103 c:\users\nico\desktop\tp_laboratorio_1\tp2\arrayemployees.h
 	"funciones.h"
 	"menu.h"
 	<stdio.h>
-
-1589577922 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.c
-	"funciones.h"
-
-1589577632 c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.h
-	<stdio.h>
+	<conio.h>
+	<ctype.h>
 	<string.h>
 
-1589578956 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\menu.c
+1589595046 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.c
+	"funciones.h"
+
+1589596690 c:\users\nico\desktop\tp_laboratorio_1\tp2\funciones.h
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	<conio.h>
+	<stdlib.h>
+
+1589595892 source:c:\users\nico\desktop\tp_laboratorio_1\tp2\menu.c
 	"Menu.h"
 
-1589568966 c:\users\nico\desktop\tp_laboratorio_1\tp2\menu.h
+1589586306 c:\users\nico\desktop\tp_laboratorio_1\tp2\menu.h
 	<stdio.h>
 

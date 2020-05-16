@@ -2,8 +2,6 @@
 
 void MenuPrincipal()
 {
-
-
             printf("\n\n\t\t\t*** MENU PRINCIPAL ***\n");
             printf("\n\t\t1_Cargar un empleado");
             printf("\n\t\t2_Modificar");
@@ -21,6 +19,13 @@ void MenuModificar()
             printf("\n\t\t5_Aplicar cambios");
             printf("\n\t\t6_Modificar otro empleado");
             printf("\n\t\t7_Salir al menu principal");
+}
+
+void MenuListas()
+{
+    printf("\n\t\t(0) Mostrar lista descendente");
+    printf("\n\t\t(1) Mostrar lista ascendente");
+    printf("\n\t\t(*) Cualquier otra tecla para salir");
 }
 
 void HeaderEmpleados(char legajo[],char nombre[],char apellido[],char salario[],char sector[])

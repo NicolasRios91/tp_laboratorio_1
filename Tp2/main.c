@@ -1,100 +1,105 @@
-#include <stdio.h>
+
 #include <stdlib.h>
-#include <string.h>
-#include <conio.h>
+
 #include "ArrayEmployees.h"
-#define T 5
+#define T 1000
 #define LIBRE 0
 #define OCUPADO 1
 
 
 int main()
 {
-
     int variableControl;
-    //int inicializarEnCero;
-    //int HayEmpleados;
     float promedioSalario;
     int contadorSalario;
     int generadorId=0;
     int opcion;
-    int id;
+    int opcionMenuListas;
+    int idIngresado;
 
-    Employee listaEmpleados[T]={{1,"maria de los angeles","Apellido",250,7,1},{2,"BART","VERGIL",100,5,1},{3,"Dante","VERGIL",100,2,1}};
+    Employee listaEmpleados[T];
+    variableControl = InitEmployees(listaEmpleados,T);
 
-    //variableControl = InitEmployees(listaEmpleados,T);
-        do
+    do
+    {
+        MenuPrincipal();
+        fflush(stdin);
+        opcion = getInt("\n\n\t\t\tElija una opcion: ");
+        switch(opcion)
         {
-            MenuPrincipal();
-            fflush(stdin);
-            opcion = getInt("\n\n\t\tElija una opcion: ");
-            switch(opcion)
-            {
-                case 1:
-                    generadorId = CargarEmpleado(listaEmpleados,T,generadorId,"\t\tEl empleado se cargo exitosamente","No se pudo cargar al empleado");
-                    break;
-                case 2:
-                    variableControl = SaberSiHayEmpleados(listaEmpleados,T);
-                    if (variableControl!=-1)
+            case 1:
+                generadorId = CargarEmpleado(listaEmpleados,T,generadorId,"\tEl empleado se cargo exitosamente,presione una tecla para continuar",
+                                                                            "\tNo se pudo cargar al empleado,presione una tecla para continuar");
+                break;
+            case 2:
+                variableControl = SaberSiHayEmpleados(listaEmpleados,T);
+                if (variableControl!=-1)
+                {
+                    ModifiyEmployee(listaEmpleados,T);
+                }
+                else
+                {
+                    PedirCaracter("\n\t\tNo hay empleados cargados,presione una tecla para continuar... ");
+                }
+                break;
+            case 3:
+                variableControl = SaberSiHayEmpleados(listaEmpleados,T);
+                if (variableControl!=-1)
+                {
+                    idIngresado = getInt("\n\t\tIngrese la ID del empleado que desea eliminar: ");
+                    variableControl = RemoveEmployee(listaEmpleados,T,idIngresado,"\n\t\tSe elimino al empleado,presiona una tecla para continuar",
+                                                        "\n\t\tNo se elimino al empleado,presione una tecla para continuar",
+                                                        "\n\t\tNo se encontró la ID, presione una tecla pra continuar\n");
+                }
+                else
+                {
+                    PedirCaracter("\n\t\tNo hay empleados cargados,presione una tecla para continuar... ");
+                }
+                break;
+            case 4:
+                variableControl = SaberSiHayEmpleados(listaEmpleados,T);
+                if (variableControl==0)
+                {
+                    do
                     {
-                        ModifiyEmployee(listaEmpleados,T);
-                    }
-                    else
-                    {
-                        printf("\n\t\tNo hay empleados cargados,presione una tecla para continuar... ");
-                        getch();
-                        system("cls");
-                    }
-                    break;
-                case 3:
-                    variableControl = SaberSiHayEmpleados(listaEmpleados,T);
-                    if (variableControl!=-1)
-                    {
-                        id = getInt("\n\t\tIngrese la ID del empleado que desea eliminar: ");
-                        variableControl = RemoveEmployee(listaEmpleados,T,id,"\n\t\tSe elimino al empleado\n","\n\t\tNo se elimino al empleado","\n\t\tNo se encontró la ID\n");
-                    }
-                    else
-                    {
-
-                        printf("\n\t\tNo hay empleados cargados,presione una tecla para continuar... ");
-                        getch();
-                        system("cls");
-                    }
-                    break;
-                case 4:
-
-                    variableControl = SaberSiHayEmpleados(listaEmpleados,T);
-                    if (variableControl==0)
+                        MenuListas();
+                        opcionMenuListas = getInt("\n\n\t\t\tElija una opcion: ");
+                        variableControl = OrdenarLista(listaEmpleados,T,opcionMenuListas);
+                        if (variableControl ==-1)
                         {
-                        system("cls");
-                        printf("\n\t\t\t**LISTA DE EMPLEADOS**\n");
-                        HeaderEmpleados("ID","NOMBRE","APELLIDO","SALARIO","SECTOR");
-                        OrdenarAscendentemente(listaEmpleados,T);
-                        variableControl = PrintEmployees(listaEmpleados,T);
-                        promedioSalario = SacarPrommedio (listaEmpleados,T);
-                        contadorSalario = SacarEmpleadosMayorAlPromedio(listaEmpleados,T,promedioSalario);
-                        if (contadorSalario>0)
-                        {
-                            printf("\n\tCantidad de empleados que superan el salario promedio: %d",contadorSalario);
+                            break;
                         }
                         else
                         {
-                            printf("\n\tNingun empleado supera el salario promedio");
+                            system("cls");
+                            OrdenarLista(listaEmpleados,T,opcionMenuListas);
+                            printf("\n\t\t\t**LISTA DE EMPLEADOS**\n");
+                            HeaderEmpleados("ID","NOMBRE","APELLIDO","SALARIO","SECTOR");
+                            variableControl = PrintEmployees(listaEmpleados,T);
+                            promedioSalario = SacarPrommedio (listaEmpleados,T);
+                            contadorSalario = SacarEmpleadosMayorAlPromedio(listaEmpleados,T,promedioSalario);
+                            if (contadorSalario>0)
+                            {
+                                printf("\tCantidad de empleados que superan el salario promedio: %d\n",contadorSalario);
+                            }
+                            else
+                            {
+                                printf("\n\tNingun empleado supera el salario promedio\n");
+                            }
                         }
-                    }
-                    else
-                    {
-                        printf("\n\t\tNo hay empleados cargados,presione una tecla para continuar... ");
-                        getch();
-                        system("cls");
-                    }
-                    break;
-                case 5:
-                    break;
-                default:
-                    printf("\n\t\tIngrese una opcion correcta");
-            }
-        }while (opcion!=5);
-
+                    }while(opcionMenuListas !=2);
+                system("cls");
+                }
+                else
+                {
+                    PedirCaracter("\n\t\tNo hay empleados cargados,presione una tecla para continuar... ");
+                }
+                break;
+            case 5:
+                break;
+            default:
+                PedirCaracter("\n\t\tIngrese una opcion correcta, presione una tecla para continuar... ");
+        }
+    }while (opcion!=5);
 }
 

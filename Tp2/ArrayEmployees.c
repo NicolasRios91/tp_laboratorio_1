@@ -1,7 +1,5 @@
 #include "ArrayEmployees.h"
 
-#define LIBRE 0
-#define OCUPADO 1
 
 void PrintEmployee(Employee lista)
 {
@@ -141,11 +139,11 @@ int CargarEmpleado(Employee lista[],int tam,int generadorID,char msj[],char erro
         if (retorno!=-1)
         {
            generadorID++;
-           printf("\n%s",msj);// se cargo el empleado
+           PedirCaracter (msj);// se cargo el empleado
         }
         else
         {
-            printf("\n%s",error);//no hay espacio
+            PedirCaracter (error);//no hay espacio
         }
 
         return generadorID;
@@ -183,19 +181,18 @@ int RemoveEmployee(Employee lista[],int tam, int id,char confirma[],char cancela
         respuesta = getchar();
         if (respuesta=='s')
         {
-            system("cls");
-            printf("%s",confirma);
             lista[indice].isEmpty=LIBRE;
+            PedirCaracter(confirma);
             retorno=0;
         }
         else
         {
-            printf("%s",cancela);
+            PedirCaracter(cancela);
         }
     }
     else
     {
-        printf("%s",error);
+        PedirCaracter(error);
     }
     return retorno;
 }
@@ -267,7 +264,7 @@ void ModifiyEmployee(Employee lista[],int tam)
             {
                 MenuModificar();
                 fflush(stdin);
-                opcion = getInt("\n\n\t\tElija una opcion: ");
+                opcion = getInt("\n\n\t\t\tElija una opcion: ");
                 if (opcion==7)
                 {
                     system("cls");
@@ -369,45 +366,49 @@ void ModifiyEmployee(Employee lista[],int tam)
 }
 
 
-void OrdenarAscendentemente(Employee lista[],int tam)//A-Z y de mayor a menor los sectores
+int OrdenarLista(Employee lista[],int tam,int orden) //0
 {
+    int retorno=-1;
     int i;
     int j;
     Employee aux;
-    for (i=0;i<tam-1;i++)
+    if (orden ==1)
     {
-        for (j=i+1;j<tam;j++)
+        for (i=0;i<tam-1;i++)//ascentente 1
         {
-            //primero evalua si un apellido es "mayor" que otro, sino de ser iguales los ordena por sector de menor a mayor
-            if (strcmp(lista[i].lastName,lista[j].lastName)>0 || (strcmp(lista[i].lastName,lista[j].lastName)==0 && lista[i].sector > lista[j].sector))
+            for (j=i+1;j<tam;j++)
             {
-                aux = lista[i];
-                lista[i]=lista[j];
-                lista[j]=aux;
+                if (strcmp(lista[i].lastName,lista[j].lastName)>0 || (strcmp(lista[i].lastName,lista[j].lastName)==0 && lista[i].sector > lista[j].sector))//A-Z , Y MENOR A MAYOR
+                {
+                    aux = lista[i];
+                    lista[i]=lista[j];
+                    lista[j]=aux;
+                }
             }
         }
+        retorno=0;
     }
-}
-
-void OrdenarPorSector(Employee lista[],int tam)
-{
-    int i;
-    int j;
-    Employee aux;
-    for (i=0;i<tam-1;i++)
+    else
     {
-        for (j=1;j<tam;j++)
+        if (orden ==0) //ascendente 0
         {
-            //como primera condicion evalua si un sector es mayor que otro, sino de ser iguales evalua el apellido para establecer un orden por apellido
-            if (lista[i].sector > lista[j].sector || (lista[i].sector == lista[j].sector && strcmp(lista[i].lastName,lista[j].lastName)>0))
+            for (i=0;i<tam-1;i++)
             {
-                aux = lista[i];
-                lista[i]=lista[j];
-                lista[j]=aux;
+                for (j=i+1;j<tam;j++)
+                {
+                    if (strcmp(lista[i].lastName,lista[j].lastName)<0 || (strcmp(lista[i].lastName,lista[j].lastName)==0 && lista[i].sector < lista[j].sector))//Z-A Y MAYOR A MENOR
+                    {
+                        aux = lista[i];
+                        lista[i]=lista[j];
+                        lista[j]=aux;
+                    }
+                }
             }
-
+            retorno=0;
         }
+
     }
+    return retorno;
 }
 
 float SacarPrommedio (Employee lista[],int tam)
@@ -426,7 +427,7 @@ float SacarPrommedio (Employee lista[],int tam)
     }
     PromedioSalario = acumuladorSalario/contador;
     printf("\n\n\tSuma total de los salarios: %.2f",acumuladorSalario);
-    printf("\n\tPromedio de salario: %.2f",PromedioSalario);
+    printf("\n\tPromedio de salario: %.2f\n",PromedioSalario);
     return PromedioSalario;
 }
 

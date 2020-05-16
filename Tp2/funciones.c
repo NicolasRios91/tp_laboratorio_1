@@ -1,9 +1,5 @@
 #include "funciones.h"
 
-
-
-
-
 int ValidarCadena (char str[],int size,char error[])// si es menor (valido) devuelve 0
 {
     int retorno=0;
@@ -87,20 +83,16 @@ int getInt (char msj[])
 }
 
 
-int SacarMaximo(int valor1,int control)
-{
-    int maximo;
-    if (valor1>maximo ||control ==0)
-    {
-        maximo=valor1;
-    }
-    return maximo;
-}
-
 void CopiarStrValidado(char cadenaDestino[],char cadenaOrigen[])
 {
     strcpy(cadenaDestino,cadenaOrigen);
     ConvertirPrimerCaracterStrMayus(cadenaDestino);
 }
 
+void PedirCaracter (char msj[])
+{
+    printf("%s",msj);
+    getch();
+    system("cls");
+}
 
