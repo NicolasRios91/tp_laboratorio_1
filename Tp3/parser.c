@@ -8,9 +8,7 @@ int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
     int ret =0;
     char a[500],b[500],c[500],d[500];
     int r;
-    //pFile = fopen("data.csv","r");
     Employee* empleado;
-    //fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",a,b,c,d);
         while(!feof(pFile))
         {
             if(feof(pFile))
@@ -25,7 +23,6 @@ int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
                 ret = 1;
             }
         }
-    //fclose(pFile);
     return ret;
 }
 

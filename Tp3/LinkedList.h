@@ -41,7 +41,7 @@ int test_addNode(LinkedList* this, int nodeIndex,void* pElement);
 //1
 int ll_add(LinkedList* this, void* pElement);
 void* ll_get(LinkedList* this, int index);
-int ll_remove(LinkedList* this,int index);
+int ll_remove(LinkedList* this,int index);//-1 si no pudo borrar, 0 si puedo borrar
 int ll_clear(LinkedList* this); //devuelve 0 si la vacio
 int ll_deleteLinkedList(LinkedList* this);
 int ll_indexOf(LinkedList* this, void* pElement);
