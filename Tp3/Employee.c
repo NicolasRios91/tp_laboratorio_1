@@ -6,7 +6,6 @@ Employee* employee_new()
 {
     Employee* miEmpleado;
     miEmpleado = (Employee*) malloc(sizeof(Employee));
-
     return miEmpleado;
 }
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr,char* sueldoStr)
@@ -25,7 +24,7 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 int employee_setNombre(Employee* this,char* nombre)
 {
     int retorno = 0;
-    if (this!= NULL)
+    if(this!=NULL && strlen(nombre)!=NULL)
     {
         strcpy(this->nombre,nombre);
         retorno = 1;
@@ -35,11 +34,12 @@ int employee_setNombre(Employee* this,char* nombre)
 
 int employee_getNombre(Employee* this,char* nombre)
 {
-    int retorno = 0;
-    if (this!=NULL && nombre!=NULL)
+    int retorno=0;
+
+    if(this!=NULL)
     {
-        strcpy(nombre,this->nombre);
-        retorno = 1;
+        strcpy(nombre, this->nombre);
+        retorno=1;
     }
     return retorno;
 }
@@ -58,7 +58,7 @@ int employee_setSueldo(Employee* this,int sueldo)
 int employee_getSueldo(Employee* this,int* sueldo)
 {
     int retorno = 0;
-    if (this!=NULL)
+    if (this!=NULL && sueldo!=NULL)
     {
         *sueldo = this->sueldo;
         retorno = 1;
@@ -79,7 +79,7 @@ int employee_setId(Employee* this,int id)
 int employee_getId(Employee* this,int* id)
 {
     int retorno = 0;
-    if (this!= NULL)
+    if (this!= NULL && id!=NULL)
     {
         *id = this->id;
         retorno = 1;
@@ -99,48 +99,125 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 }
 int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 {
-    int retorno = 0;
-    if (this!= NULL)
+    int retorno=0;
+
+    if(this!=NULL && horasTrabajadas!=NULL)
     {
         *horasTrabajadas = this->horasTrabajadas;
         retorno = 1;
     }
     return retorno;
-
 }
 
 
-int employee_CompareByName(Employee* e1, Employee* e2)
+int employee_CompareByName(void* e1, void* e2)
 {
     //verificar nulidad
 
-    return strcmp(e1->nombre, e2->nombre);
-}
-
-int employee_CompareById(Employee* e1, Employee* e2)
-{
-    //verificar nulidad
-
-    if(e1->id > e2->id)
+    Employee* aux1;
+    Employee* aux2;
+    int ret;
+    if(e1 !=NULL && e2!=NULL)
     {
-        return 1;
+        aux1 = (Employee*)e1;
+        aux2 = (Employee*)e2;
+        ret = strcmp(aux1->nombre,aux2->nombre);
+    }
+
+    return ret;
+}
+
+int employee_CompareById(void* e1, void* e2)
+{
+    Employee* aux1;
+    Employee* aux2;
+    //int id1;
+    //int id2;
+    int ret;
+    if(e1 !=NULL && e2!=NULL)
+    {
+        aux1 = (Employee*)e1;
+        aux2 = (Employee*)e2;
+    }
+
+    //employee_getId(aux1->id,&id1);
+    //employee_getId(aux2->id,&id2);
+
+    if(aux1->id > aux2->id)
+    {
+        ret = 1;
     }
     else
     {
-        if(e1->id < e2->id)
+        if(aux1->id < aux2->id)
         {
-            return -1;
+            ret = -1;
         }
         else
         {
-            return 0;
+            ret = 0;
+        }
+    }
+    return ret;
+}
+
+int employee_CompareBySueldo(void* e1, void* e2)
+{
+    Employee* aux1;
+    Employee* aux2;
+    int ret;
+
+    if(e1!=NULL && e2!=NULL)
+    {
+        aux1 = (Employee*) e1;
+        aux2 = (Employee*) e2;
+
+        if(aux1->sueldo > aux2->sueldo)
+        {
+            ret=1;
+
+        }
+        else
+        {
+            if(aux1->sueldo < aux2->sueldo)
+            {
+                ret=-1;
+            }
+            else
+            {
+                ret = 0;
+            }
         }
     }
 
-
-
-    return strcmp(e1->nombre, e2->nombre);
+    return ret;
 }
 
+int employee_CompareByHoras(void* e1, void* e2)
+{
+    Employee* aux1;
+    Employee* aux2;
+    int ret;
+    if(e1 !=NULL && e2!=NULL)
+    {
+        aux1 = (Employee*)e1;
+        aux2 = (Employee*)e2;
+    }
 
-
+    if (aux1->horasTrabajadas > aux2->horasTrabajadas)
+    {
+        ret =1;
+    }
+    else
+    {
+        if (aux1->horasTrabajadas < aux2->horasTrabajadas)
+        {
+            ret = -1;
+        }
+        else
+        {
+            ret =0;
+        }
+    }
+    return ret;
+}

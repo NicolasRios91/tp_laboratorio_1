@@ -32,23 +32,81 @@ struct LinkedList
 #endif
 
 //Publicas
-LinkedList* ll_newLinkedList(void);
 
+LinkedList* ll_newLinkedList(void);
+/** \brief devuelve el largo de una lista
+ *
+ * \param LinkedList* this
+ * \return int
+ *
+ */
 int ll_len(LinkedList* this);
 Node* test_getNode(LinkedList* this, int nodeIndex);
 int test_addNode(LinkedList* this, int nodeIndex,void* pElement);
 
-//1
+/** \brief Agrega un elemento a la lista
+ *
+ * \param LinkedList* this
+ * \return int
+ *
+ */
 int ll_add(LinkedList* this, void* pElement);
+
+/** \brief devuelve un elemento de lista segun el indice indicado por parametro
+ *
+ * \param LinkedList* this
+ * \return int
+ *
+ */
 void* ll_get(LinkedList* this, int index);
-int ll_remove(LinkedList* this,int index);//-1 si no pudo borrar, 0 si puedo borrar
-int ll_clear(LinkedList* this); //devuelve 0 si la vacio
+
+/** \brief elimina un elemento de la lista segun el indice indicado por parametro
+ *
+ * \param LinkedList* this
+ * \return int (-1 si no pudo borrar, 0 si puedo borrar)
+ *
+ */
+int ll_remove(LinkedList* this,int index);
+
+/** \brief vacia una lista
+ *
+ * \param LinkedList* this
+ * \return int devuelve 0 si la vacio
+ *
+ */
+int ll_clear(LinkedList* this);
+
+/** \brief elimina una lista
+ *
+ * \param LinkedList* this
+ * \return int
+ *
+ */
 int ll_deleteLinkedList(LinkedList* this);
+
+/** \brief devuelve el indice de un elemento de la lista
+ *
+ * \param LinkedList* this
+ * \return int
+ *
+ */
 int ll_indexOf(LinkedList* this, void* pElement);
-int ll_isEmpty(LinkedList* this);//devuelve 1 si esta vacia, 0 si tiene datos
 
+/** \brief evalua si la lista esta vacia
+ *
+ * \param LinkedList* this
+ * \return int devuelve 1 si esta vacia, 0 si tiene datos
+ *
+ */
+int ll_isEmpty(LinkedList* this);
+
+/** \brief realiza un ordenamiento
+ *
+ * \param LinkedList* this
+ * \return int
+ *
+ */
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);
-
 
 
 
